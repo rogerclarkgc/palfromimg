@@ -4,7 +4,15 @@
 \alias{palfromimg}
 \title{Extract color palette from a image file}
 \usage{
-palfromimg(imgpath, coln = 6, alpha = 1, seed = 1234, resize = TRUE, sort = 1)
+palfromimg(
+  imgpath,
+  coln = 6,
+  alpha = 1,
+  seed = 1234,
+  resize = TRUE,
+  sort = 1,
+  onlycolour = FALSE
+)
 }
 \arguments{
 \item{imgpath}{the path of the image file, only support image with RGB color space now}
@@ -18,9 +26,11 @@ palfromimg(imgpath, coln = 6, alpha = 1, seed = 1234, resize = TRUE, sort = 1)
 \item{resize}{resize(shrink) the image before kmeans to avoid memory overflow in Kmeans}
 
 \item{sort}{sort the palette by color channel}
+
+\item{onlycolour}{if TRUE, return the colour code instead of colour list object}
 }
 \value{
-A list object, contain a ggplot2 palette function and meta info of the image
+A list object/character vector object, contain a ggplot2 palette function and meta info of the image/only colour code
 }
 \description{
 This function use the Kmeans method to extract the color palette from a image file

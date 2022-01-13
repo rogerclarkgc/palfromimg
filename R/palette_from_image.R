@@ -8,12 +8,13 @@
 #' @param seed random seed of kmeans
 #' @param resize resize(shrink) the image before kmeans to avoid memory overflow in Kmeans
 #' @param sort sort the palette by color channel
-#' @return A list object, contain a ggplot2 palette function and meta info of the image
+#' @param onlycolour if TRUE, return the colour code instead of colour list object
+#' @return A list object/character vector object, contain a ggplot2 palette function and meta info of the image/only colour code
 #' @examples
 #' pal_deus <- palfromimg(imgpath = "./ipcc10.jpg", coln =10, sort = 2)
 #' show_col(pal_deus$pal(10))
 
-palfromimg <- function(imgpath, coln = 6, alpha = 1, seed = 1234, resize = TRUE, sort = 1){
+palfromimg <- function(imgpath, coln = 6, alpha = 1, seed = 1234, resize = TRUE, sort = 1, onlycolour = FALSE){
 
   set.seed(seed)
   if (resize)
@@ -36,12 +37,16 @@ palfromimg <- function(imgpath, coln = 6, alpha = 1, seed = 1234, resize = TRUE,
                     img.center[, 3],
                     maxColorValue = 255L,
                     alpha = alpha * 255L)
-  list(pal = scales::manual_pal(colour.pal),
+  if (onlycolour){
+    return(colour.pal)
+  }else{
+    list(pal = scales::manual_pal(colour.pal),
        coln = coln,
        alpha = alpha,
        seed = seed,
        center = img.center,
        colorspace = space)
+  }
 }
 
 #' @title Generate a ggplot2 color palette scale function (aes = colour)

@@ -12,7 +12,7 @@
 #' # order the palette by hand in the App window
 #' @seealso [palfromimg()]
 
-palette_sort <- function(pal){
+palette_sort <- function(pal, simple = FALSE){
   coln <- pal$coln
   old_pal <- pal$pal
   if(!(require(shiny) & require(shinyjqui) & require(scales)))
@@ -41,7 +41,11 @@ palette_sort <- function(pal){
     observeEvent(input$done,{
         new_cols <- input$op
         pal$pal <- scales::manual_pal(new_cols)
-        stopApp(pal)}
+        if (simple)
+          stopApp(new_cols)
+        else
+          stopApp(pal)
+        }
     )
   }
   viewer <- dialogViewer("Sort the palette by hand", width = 800, height = 750)

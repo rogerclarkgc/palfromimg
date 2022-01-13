@@ -4,7 +4,7 @@
 \alias{palette_sort}
 \title{Sort the palette by hand}
 \usage{
-palette_sort(pal)
+palette_sort(pal, simple = FALSE)
 }
 \arguments{
 \item{pal}{the palette list object returned by palfromimg}
